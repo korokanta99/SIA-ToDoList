@@ -1,0 +1,321 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow-x: hidden;
+    background: #F3F0E5; /* Light, creamy background */
+  }
+  
+  /* Sidebar - slide in/out */
+ /* Sidebar - slide in/out, aesthetic improvements */
+/* Sidebar - slide in/out, aesthetic improvements */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    /* Keep the nature-themed background or tweak it as desired */
+    background-color: rgba(155, 161, 123, 0.95);
+    color: #000; /* default text color to black */
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    backdrop-filter: blur(5px); /* optional frosted-glass effect */
+  }
+  #sidebar.show {
+    transform: translateX(0);
+  }
+  
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 20px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 2px solid #000; /* black border around the circle */
+  }
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Profile info text is now black */
+  .profile-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #000; /* black */
+  }
+  .profile-info p {
+    font-size: 0.9rem;
+    color: #333; /* or #000 if you want it fully black */
+  }
+  
+  .sidebar-nav ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+  }
+  .sidebar-nav li {
+    margin-bottom: 12px;
+  }
+  /* Make links black by default, change hover background for contrast */
+  .sidebar-nav li a {
+    color: #000; /* black text */
+    text-decoration: none;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    font-size: 0.95rem;
+  }
+  /* For hover, use a slightly darker or lighter background 
+     that still shows black text clearly */
+  .sidebar-nav li a:hover {
+    background-color: rgba(143, 131, 94, 0.3);
+    color: #000;
+  }
+  
+  
+  
+  /* Main content */
+  main {
+    margin-left: 0;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+  }
+  body.sidebar-open main {
+    margin-left: 240px;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  header h1 {
+    font-size: 2rem;
+    color: #333;
+  }
+  .header-right {
+    display: flex;
+    gap: 10px;
+  }
+  #menu-toggle {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333; /* Dark text for the menu icon */
+  }
+  #add-task, #add-category {
+    padding: 10px 16px;
+    cursor: pointer;
+    background-color: #8F835E; /* Muted brownish-green for buttons */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  #add-task:hover, #add-category:hover {
+    background-color: #B39B72; /* Warmer brown for hover */
+  }
+  
+  /* Category container */
+  .todo-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .todo-category {
+    background-color: #C7CC9C; /* Lighter green for cards */
+    padding: 15px;
+    min-width: 280px;
+    flex: 1 1 280px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .category-header h2 {
+    font-size: 1.25rem;
+    color: #333;
+  }
+  .delete-category {
+    background-color: #8F835E; /* Same as button color */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease;
+  }
+  .delete-category:hover {
+    background-color: #B39B72;
+  }
+  .todo-category ul {
+    list-style-type: none;
+    margin-top: 10px;
+  }
+  li {
+    background-color: #fafafa;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Completed container */
+  .completed-container {
+    background-color: #C7CC9C; /* Same as .todo-category for consistency */
+    padding: 15px;
+    min-height: 100px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .completed-container h2 {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  
+  /* Three-dot button */
+  .task-options {
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+  }
+  
+  /* Task menu popup */
+  #task-menu {
+    position: absolute;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 5px 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    min-width: 120px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  #task-menu button {
+    background: none;
+    border: none;
+    width: 100%;
+    padding: 10px 12px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  #task-menu button:hover {
+    background-color: #f5f5f5;
+  }
+  .hidden {
+    display: none !important;
+  }
+  
+  /* Modals */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal-content {
+    background: #fff;
+    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  .modal-content label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #555;
+  }
+  .modal-content input[type="text"],
+  .modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .modal-actions button {
+    padding: 8px 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  .modal-actions button:first-child {
+    background-color: #ccc;
+    color: #333;
+  }
+  .modal-actions button:first-child:hover {
+    background-color: #b3b3b3;
+  }
+  .modal-actions button:last-child {
+    background-color: #8F835E;
+    color: #fff;
+  }
+  .modal-actions button:last-child:hover {
+    background-color: #B39B72;
+  }
+  
+  li input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  

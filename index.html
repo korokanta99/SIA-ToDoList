@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enhanced To-Do</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="user-profile">
+      <div class="profile-image">
+        <img src="profile.png" alt="User" />
+      </div>
+      <div class="profile-info">
+        <h3>carlBlueNa</h3>
+        <p>Nature Enthusiast</p>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Calendar</a></li>
+        <li><a href="#">Tasks</a></li>
+        <li><a href="#">Notes</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </nav>
+  </aside>
+  
+
+  <!-- Main Content -->
+  <main>
+    <header>
+      <h1>ToDo List</h1>
+      <div class="header-right">
+        <button id="menu-toggle">☰</button>
+        <button id="add-category">+ New Category</button>
+        <button id="add-task">+ Add Task</button>
+      </div>
+    </header>
+
+    <section id="categories-container" class="todo-container">
+      <!-- Category blocks will be rendered dynamically -->
+    </section>
+
+    <section class="completed-container">
+      <h2>Completed</h2>
+      <ul id="completed-list"></ul>
+    </section>
+  </main>
+
+  <!-- Task Menu (dropdown for Edit/Delete/Move) -->
+  <div id="task-menu" class="hidden">
+    <button id="edit-task">Edit</button>
+    <button id="delete-task">Delete</button>
+    <button id="move-task">Move</button>
+  </div>
+
+  <!-- MODALS -->
+  <!-- Add Task Modal -->
+  <div id="add-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Add New Task</h2>
+      <label for="new-task-title">Task Title:</label>
+      <input type="text" id="new-task-title" />
+      
+      <label for="new-task-category">Category:</label>
+      <select id="new-task-category"></select>
+      
+      <div class="modal-actions">
+        <button id="cancel-add">Cancel</button>
+        <button id="save-add">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Task Modal -->
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Edit Task</h2>
+      <label for="edit-task-title">Task Title:</label>
+      <input type="text" id="edit-task-title" />
+
+      <label for="edit-task-category">Category:</label>
+      <select id="edit-task-category"></select>
+
+      <div class="modal-actions">
+        <button id="cancel-edit">Cancel</button>
+        <button id="save-edit">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Move Task Modal -->
+  <div id="move-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Move Task</h2>
+      <label for="move-task-category">Select Category:</label>
+      <select id="move-task-category"></select>
+
+      <div class="modal-actions">
+        <button id="cancel-move">Cancel</button>
+        <button id="confirm-move">Move</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Category Modal -->
+  <div id="add-category-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Add New Category</h2>
+      <label for="new-category-name">Category Name:</label>
+      <input type="text" id="new-category-name" />
+
+      <div class="modal-actions">
+        <button id="cancel-category">Cancel</button>
+        <button id="save-category">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
