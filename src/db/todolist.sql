@@ -29,10 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tasks` (
   `task_id` int(11) NOT NULL,
-  `users_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `task_name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `deadline` date DEFAULT NULL,
+  `category` varchar(255) NOT NULL,
   `status` enum('pending','completed') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -43,9 +42,9 @@ CREATE TABLE `tasks` (
 --
 
 CREATE TABLE `users` (
-  `users_id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -58,13 +57,13 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`task_id`),
-  ADD KEY `users_id` (`users_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`users_id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -80,7 +79,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -90,8 +89,15 @@ ALTER TABLE `users`
 -- Constraints for table `tasks`
 --
 ALTER TABLE `tasks`
-  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`);
+  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 COMMIT;
+
+INSERT INTO `users` (`user_name`, `user_email`, `user_password`) VALUES
+('admin', 'admin@gmail.com', '123');
+
+INSERT INTO `tasks` (`user_id`, `task_name`, `category`, `status`) VALUES
+(1, 'Hunting', 'Work', 'pending');
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
