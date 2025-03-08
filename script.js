@@ -248,6 +248,43 @@ document.addEventListener("DOMContentLoaded", () => {
   
       return li;
     }
+
+
+function setCookie(name, value, days) {
+  let expires = "";
+  if (days) {
+      let date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + value + "; path=/" + expires;
+}
+
+
+function getCookie(name) {
+  let nameEQ = name + "=";
+  let cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+      let c = cookies[i].trim();
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+  }
+  return null;
+}
+
+
+function checkUserVisit() {
+  let visit = getCookie("user_visit");
+  if (!visit) {
+      alert("Welcome! This is your first time visiting.");
+      setCookie("user_visit", "yes", 30); 
+  } else {
+      console.log("Welcome back!");
+  }
+}
+
+
+document.addEventListener("DOMContentLoaded", checkUserVisit);
+
   
     function moveToCompleted(li) {
       completedList.appendChild(li);
