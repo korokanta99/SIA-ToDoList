@@ -96,3 +96,7 @@ button:hover {
     color: black;
     margin-bottom: 10px;
 }
+
+.hidden {
+    display: none !important;
+}

@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tasks` (
-  `task_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `task_name` varchar(255) NOT NULL,
-  `category` varchar(255) NOT NULL,
-  `status` enum('pending','completed') DEFAULT 'pending'
+    `task_id` int(11) NOT NULL,
+    `user_id` int(11) DEFAULT NULL,
+    `task_name` varchar(255) NOT NULL,
+    `description` TEXT,
+    `deadline` DATE,
+    `status` enum('pending','completed') DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -95,8 +95,8 @@ COMMIT;
 INSERT INTO `users` (`user_name`, `user_email`, `user_password`) VALUES
 ('admin', 'admin@gmail.com', '123');
 
-INSERT INTO `tasks` (`user_id`, `task_name`, `category`, `status`) VALUES
-(1, 'Hunting', 'Work', 'pending');
+INSERT INTO tasks (task_id, user_id, task_name, description, deadline, status)
+VALUES (1, 1, 'Test Task', 'This is a test description', '2025-03-15', 'pending');
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
