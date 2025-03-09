@@ -1,10 +1,4 @@
-<?php
-require 'function.php';
-if (isset($_SESSION["id"])) {
-    header("Location: index.php");
-    exit();
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +13,10 @@ if (isset($_SESSION["id"])) {
         <div class="form-box">
             <h2>Sign in</h2>
             <p>New to ToDo? <a href="signup.php">Sign Up here</a></p>
-            <form autocomplete="off" action="index.php" method="post">
-                <input type="text" name="email" placeholder="Email Address" required>
+            <<form autocomplete="off" action="function.php" method="post">
+                <input type="email" name="email" placeholder="Email Address" required>
                 <input type="password" name="password" placeholder="Password" required>
+                <input type="hidden" name="action" value="login">
                 <a href="#" class="forgot-password">Forgot password?</a>
                 <button type="submit">Sign in</button>
             </form>
