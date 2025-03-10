@@ -37,19 +37,21 @@
 <div id="add-modal" class="modal hidden">
     <div class="modal-content">
         <h2>Add New Task</h2>
-        <label for="new-task-title">Task Title:</label>
-        <input type="text" id="new-task-title" />
+        <form id="modalForm">
+            <label for="new-task-title">Task Title:</label>
+            <input type="text" id="new-task-title" name="new-task-title" required />
 
-        <label for="new-task-desc">Task Description:</label>
-        <textarea id="new-task-desc"></textarea>
+            <label for="new-task-desc">Task Description:</label>
+            <textarea id="new-task-desc" name="new-task-desc"></textarea>
 
-        <label for="new-task-deadline">Deadline:</label>
-        <input type="date" id="new-task-deadline" />
+            <label for="new-task-deadline">Deadline:</label>
+            <input type="date" id="new-task-deadline" name="new-task-deadline" required />
 
-        <div class="modal-actions">
-            <button id="cancel-add">Cancel</button>
-            <button id="save-add">Save</button>
-        </div>
+            <div class="modal-actions">
+                <button id="cancel-add" type="button">Cancel</button>
+                <button id="save-add" type="submit">Save</button>
+            </div>
+        </form>      
     </div>
 </div>
 
@@ -58,6 +60,8 @@
     <div class="task-texts">
         <span class="task-title">Complete project documentation</span>
         <span class="task-desc">Review and update all documentation files</span>
+        <br>
+        <span class="task-deadline"></span>
     </div>
 </li>
 

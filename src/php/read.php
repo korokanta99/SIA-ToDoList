@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-session_start();
+ob_start();
 
 include_once("db_connect.php");
 
@@ -25,6 +25,8 @@ try {
         $data[] = $row;
     }
     
+
+    ob_end_clean();
     echo json_encode(['status' => $status, 'data' => $data, 'count' => count($data)]);
 } catch (Exception $e) {
     echo json_encode(['status' => 500, 'message' => 'Database error: ' . $e->getMessage()]);

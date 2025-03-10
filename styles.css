@@ -95,6 +95,7 @@ header {
 
 /* Task Items */
 .task-item {
+  position: relative;
   background-color: #fafafa;
   padding: 10px;
   border-radius: 4px;
@@ -103,6 +104,7 @@ header {
   gap: 10px;
   align-items: flex-start;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding-top: 25px; 
 }
 
 .task-item:hover {
@@ -128,6 +130,15 @@ header {
 .task-desc {
   font-size: 0.875rem;
   color: #666;
+}
+
+.task-deadline {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #B39B72;
 }
 
 /* Modals */
