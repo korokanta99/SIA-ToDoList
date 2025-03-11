@@ -93,6 +93,23 @@ header {
   margin-bottom: 10px;
 }
 
+.delete-btn, .edit-btn {
+  background-color: #7f673c; /* Brown shade similar to the Add Task button */
+  color: white;
+  border: none;
+  padding: 8px 14px; /* Adjust for better size */
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 0rem;
+}
+
+.delete-btn:hover, .edit-btn:hover {
+  background-color: #6b5732; /* Darker brown for hover effect */
+}
+
+
 /* Task Items */
 .task-item {
   position: relative;
@@ -107,19 +124,40 @@ header {
   padding-top: 25px; 
 }
 
+.task-item {
+  position: relative;
+  background-color: #fafafa;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center; /* Keep items in a row */
+  justify-content: space-between; /* Space out elements */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding-top: 25px;
+}
+
+.task-texts {
+  flex-grow: 1; /* Ensure text expands */
+  margin-left: 10px; /* Space between checkbox and text */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.task-actions {
+  display: flex; /* Ensure buttons are side by side */
+  gap: 5px; /* Add small space between buttons */
+}
+
 .task-item:hover {
   background-color: #f0f0f0;
 }
 
 .task-item input[type="checkbox"] {
-  margin-top: 5px;
+  margin-bottom: 45px;
+  margin-left: 10px;
   cursor: pointer;
-}
-
-.task-texts {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 }
 
 .task-title {

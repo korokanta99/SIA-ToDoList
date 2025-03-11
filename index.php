@@ -33,7 +33,7 @@
     </section>
 </main>
 
-<!-- Add Task Modal -->
+<!-- Modals -->
 <div id="add-modal" class="modal hidden">
     <div class="modal-content">
         <h2>Add New Task</h2>
@@ -50,6 +50,27 @@
             <div class="modal-actions">
                 <button id="cancel-add" type="button">Cancel</button>
                 <button id="save-add" type="submit">Save</button>
+            </div>
+        </form>      
+    </div>
+</div>
+
+<div id="edit-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Edit Task</h2>
+        <form id="editForm">
+            <label for="edit-task-title">Task Title:</label>
+            <input type="text" id="edit-task-title" name="edit-task-title" required />
+
+            <label for="edit-task-desc">Task Description:</label>
+            <textarea id="edit-task-desc" name="edit-task-desc"></textarea>
+
+            <label for="edit-task-deadline">Deadline:</label>
+            <input type="date" id="edit-task-deadline" name="edit-task-deadline" required />
+
+            <div class="modal-actions">
+                <button id="cancel-edit" type="button">Cancel</button>
+                <button id="save-edit" type="submit">Save</button>
             </div>
         </form>      
     </div>

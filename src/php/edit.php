@@ -4,11 +4,10 @@
     $isValid = true;
     $status = 400;
 
-    $task_id = trim($_REQUEST['task_id']);
-    $task_name = trim($_REQUEST['task_name']);
-    $description = trim($_REQUEST['description']);
-    $deadline = trim($_REQUEST['deadline']);
-    $task_status = trim($_REQUEST['task_status']);
+    $task_id = trim($_POST['task_id']);
+    $task_name = trim($_POST['task_name']);
+    $description = trim($_POST['description']);
+    $deadline = trim($_POST['deadline']);
 
     if ($isValid) {
         $stmt = $con->prepare("SELECT task_id FROM tasks WHERE task_id = ?");
@@ -25,8 +24,8 @@
 
     if ($isValid) {
         try {
-            $stmt = $con->prepare("UPDATE tasks SET task_name = ?, description = ?, deadline = ?, status = ? WHERE task_id = ?");
-            $stmt->bind_param("ssssi", $task_name, $description, $deadline, $task_status, $task_id);
+            $stmt = $con->prepare("UPDATE tasks SET task_name = ?, description = ?, deadline = ? WHERE task_id = ?");
+            $stmt->bind_param("sssi", $task_name, $description, $deadline, $task_id);
             $stmt->execute();
             $stmt->close();
 

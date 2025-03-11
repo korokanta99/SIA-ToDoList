@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const newTaskDeadline = document.getElementById("new-task-deadline");
     const cancelAddBtn = document.getElementById("cancel-add");
 
+
+    document.getElementById("cancel-edit").addEventListener("click", () => {
+        document.getElementById("edit-modal").classList.add("hidden");
+    })
+
     const modalForm = document.getElementById("modalForm");
 
     modalForm.addEventListener("submit", function(e) {
@@ -23,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         newTaskDeadline.value = "";
         addModal.classList.remove("hidden");
     });
+
 
     cancelAddBtn.addEventListener("click", () => {
         addModal.classList.add("hidden");
@@ -62,16 +68,107 @@ document.addEventListener("DOMContentLoaded", () => {
         titleSpan.textContent = task.task_name;
         descSpan.textContent = task.description || 'No Description';
         deadlineSpan.textContent = formatDate(task.deadline);
-    
+
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+        editBtn.classList.add('edit-btn');
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('delete-btn');
+
+        deleteBtn.addEventListener('click', () => deleteTask(task.task_id));
+        editBtn.addEventListener('click', () => editTask(task));
+
+        
+        taskElement.appendChild(deleteBtn);
+        taskElement.appendChild(editBtn);
+        
+
         return taskElement;
     }
     
+    function editTask(task) {
+        const editModal = document.getElementById("edit-modal");
+        const editTitle = document.getElementById("edit-task-title");
+        const editDesc = document.getElementById("edit-task-desc");
+        const editDeadline = document.getElementById("edit-task-deadline");
+    
+        editTitle.value = task.task_name;
+        editDesc.value = task.description || "";
+        editDeadline.value = task.deadline ? task.deadline.split("T")[0] : "";
+    
+        editModal.classList.remove("hidden");
+    
+        document.getElementById("editForm").onsubmit = async function(e) {
+            e.preventDefault();
+            await updateTask(task.task_id);
+            
+        };
+
+    }
+
+    async function updateTask(taskId) {
+        const editTitle = document.getElementById("edit-task-title").value;
+        const editDesc = document.getElementById("edit-task-desc").value;
+        const editDeadline = document.getElementById("edit-task-deadline").value;
+    
+        const formData = new FormData();
+        formData.append("task_id", taskId);
+        formData.append("task_name", editTitle);
+        formData.append("description", editDesc);
+        formData.append("deadline", editDeadline);
+    
+        try {
+            const response = await fetch('./src/php/edit.php', {
+                method: 'POST',
+                body: formData
+            });
+    
+            const result = await response.json();
+            alert(result.message);
+    
+            if (result.status === 200) {
+                fetchTasks();
+                document.getElementById("edit-modal").classList.add("hidden");
+            }
+        } catch (error) {
+            console.error('Error updating task:', error);
+            alert('Failed to update task.');
+        }
+    }
 
     function formatDate(dateString) {
         if (!dateString) return 'No deadline';
         const date = new Date(dateString);
         return `Due ${date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}`;
     }
+
+
+    async function deleteTask(taskId) {
+        if (!confirm("Are you sure you want to delete this task?")) {
+            return;
+        }
+        
+        console.log("Deleting task with ID:", taskId);
+
+        try {
+            const response = await fetch('./src/php/delete.php', {
+                method: 'POST',
+                body: new URLSearchParams({ 'task_id': taskId })
+            });
+    
+            const result = await response.json();
+            alert(result.message);
+    
+            if (result.status === 200) {
+                fetchTasks(); 
+            }
+        } catch (error) {
+            alert('Failed to delete task.');
+        }
+    }
+    
 
     function addContact(e) {
         e.preventDefault();

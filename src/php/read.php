@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
 
 try {
     $users_id = $_SESSION['user_id'];
-    $stmt = $con->prepare("SELECT task_name, description, deadline FROM tasks WHERE user_id = ? ORDER BY task_name");
+    $stmt = $con->prepare("SELECT task_id, task_name, description, deadline FROM tasks WHERE user_id = ? ORDER BY task_name");
     $stmt->bind_param("i", $users_id);
     $stmt->execute();
     $result = $stmt->get_result();
