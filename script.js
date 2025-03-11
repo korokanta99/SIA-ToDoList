@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchTasks();
 
     const addTaskBtn = document.getElementById("add-task");
-    const signOutBtn = document.getElementById("sign-out");
 
     const addModal = document.getElementById("add-modal");
     const newTaskTitle = document.getElementById("new-task-title");
@@ -38,14 +37,22 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch('./src/php/read.php');
             const data = await response.json();
-            const taskList = document.getElementById('in-progress-list');
+            const progressList = document.getElementById('in-progress-list');
+            const completeList = document.getElementById('completed-list');
 
-            taskList.innerHTML = '';
+            progressList.innerHTML = '';
+            completeList.innerHTML = '';
 
             if (data.status === 200 && Array.isArray(data.data)) {
                 data.data.forEach(task => {
                     const taskElement = createTaskElement(task);
-                    taskList.appendChild(taskElement);
+
+                    if (task.status === 'pending') {
+                        progressList.appendChild(taskElement);
+                    } else {
+                        completeList.appendChild(taskElement);
+                    }
+                    
                 });
             } else {
                 alert(data.message);
@@ -66,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const deadlineSpan = taskElement.querySelector('.task-deadline');
         
         titleSpan.textContent = task.task_name;
-        descSpan.textContent = task.description || 'No Description';
+        descSpan.textContent = task.description || "";
         deadlineSpan.textContent = formatDate(task.deadline);
 
         const editBtn = document.createElement('button');
@@ -81,6 +88,18 @@ document.addEventListener("DOMContentLoaded", () => {
         editBtn.addEventListener('click', () => editTask(task));
 
         
+        const checkBox = taskElement.querySelector('.task-checkbox');
+
+        checkBox.checked = task.status === 'completed';
+
+        checkBox.addEventListener('change', function(){
+            if (this.checked) {
+                completeTask(task.task_id, 'completed');
+            } else {
+                completeTask(task.task_id, 'pending');
+            }
+        });
+
         taskElement.appendChild(deleteBtn);
         taskElement.appendChild(editBtn);
         
@@ -137,6 +156,31 @@ document.addEventListener("DOMContentLoaded", () => {
             alert('Failed to update task.');
         }
     }
+
+    async function completeTask(taskId, status) {
+    
+        const formData = new FormData();
+        formData.append("task_id", taskId);
+        formData.append("task_status", status);
+    
+        try {
+            const response = await fetch('./src/php/complete.php', {
+                method: 'POST',
+                body: formData
+            });
+    
+            const result = await response.json();
+            alert(result.message);
+    
+            if (result.status === 200) {
+                fetchTasks();
+            }
+        } catch (error) {
+            console.error('Error updating task:', error);
+            alert('Failed to change task status.');
+        }
+    }
+    
 
     function formatDate(dateString) {
         if (!dateString) return 'No deadline';
@@ -203,5 +247,30 @@ document.addEventListener("DOMContentLoaded", () => {
         
     }
     
+
+    document.getElementById('sign-out').addEventListener('click', async function() {
+        try {
+            const response = await fetch ('./signout.php', {
+                method: 'POST',
+                credentials: 'same-origin'
+            });
+
+            const result = await response.json();
+
+            if(result.status === 200) {
+                localStorage.removeItem('user_data');
+
+                window.location.href = './signin.php';
+            } else {
+                alert('Error signing out. Please try again.');
+            }
+
+            
+        } catch (error) {
+            console.error('Sign out error:', error);
+            alert('Failed to sign out. Please try again later.');
+        }
+    });
+
 
 });

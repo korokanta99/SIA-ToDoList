@@ -10,19 +10,20 @@ body {
   background: #F3F0E5;
 }
 
-/* Header */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding: 0 20px;
+  border-bottom: 2px solid #8F835E;
 }
 
 /* Header Left - Profile Picture and Sign Out */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 .profile-pic {
@@ -47,6 +48,7 @@ header {
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.2s ease;
+
 }
 
 #sign-out:hover {

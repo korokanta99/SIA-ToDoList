@@ -14,7 +14,7 @@
             <div class="profile-pic">
                 <img src="pics/profile.jpg" alt="Profile Picture">
             </div>
-            <button id="sign-out">Sign Out</button>
+            <button id="sign-out" class="sign-out">Sign Out</button>
         </div>
         <div class="header-right">
             <button id="add-task">+ Add Task</button>
@@ -77,7 +77,7 @@
 </div>
 
 <li class="task-item hidden">
-    <input type="checkbox" />
+    <input type="checkbox" class="task-checkbox"/>
     <div class="task-texts">
         <span class="task-title">Complete project documentation</span>
         <span class="task-desc">Review and update all documentation files</span>
